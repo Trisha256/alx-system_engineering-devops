@@ -1,2 +1,3 @@
 #!/bin/bash
-ls -a -l
+ls -a -l /current_directory/parent_of_the_working_directory/boot
+
