@@ -3,7 +3,7 @@
 
 count=0
 
-while [ $count -le 10 ]
+while [ $count -le 10 ];
 do
 if [ $count -eq 4 ];
 then
