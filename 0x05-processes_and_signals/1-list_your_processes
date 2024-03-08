@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 #a Bash script that displays a list of currently running processes
 
-# Get the process hierarchy using pstree and format it for user-oriented display
-pstree -p -U -A | sed 's/[^0-9]/ /g' | awk '{ printf("%s%s\n", gensub(/[^0-9]+/, "  ", "g"), $0) }'
+# Get the process hierarchy using pstree
+pstree -h -U -p -A
 
 # Get a list of all processes using ps
-ps -e -o pid,user,ppid,args
+ps aux
