@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+# a Bash script that displays:
+
+# Function to handle the SIGTERM signal
+handle_sigterm() {
+  echo "I am invincible!!!"
+  exit 0
+}
+
+# Register the SIGTERM signal handler
+trap handle_sigterm SIGTERM
+
+# Loop indefinitely
+while true; do
+  echo "To infinity and beyond indefinitely"
+  sleep 2
+done
