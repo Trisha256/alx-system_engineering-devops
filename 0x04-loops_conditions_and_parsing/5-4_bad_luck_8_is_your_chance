@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# a Bash script that loops from 1 to 10
+#a Bash script that loops from 1 to 10
 
 count=0
 
@@ -15,5 +15,6 @@ else
 echo "Best School"
 
 fi
+
 count=$((count + 1))
 done
