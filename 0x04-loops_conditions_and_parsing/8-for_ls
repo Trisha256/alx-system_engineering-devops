@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# a Bash script that displays:
+#The content of the current directory
+#In a list format
+#Where only the part of the name after the first
+#dash is displayed (refer to the example)
+
+for file in *; do
+if [[ ! -f $file || $file == .* ]]; then
+continue
+fi
+
+filename=$(basename "$file")
+name_part="${filename#*-}"
+echo "$name_part"
+done
