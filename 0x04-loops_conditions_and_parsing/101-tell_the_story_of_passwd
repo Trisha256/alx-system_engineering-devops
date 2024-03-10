@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+#a Bash script that displays the content of the file /etc/passwd,
+#using the while loop + IFS.
+
+tmp_file=$(mktemp)  # Create a temporary file
+output_file=$(mktemp)  # Create another temporary file
+
+# Read /etc/passwd and write the filtered content to a temporary file
+grep -v '^#' /etc/passwd > "$tmp_file"
+
+while IFS=':' read -r username _ uid gid _ home shell; do
+read -r _ _ _ _ info <<< "$(grep -w "$username" "$tmp_file" | cut -d ':' -f 5)"
+password=$(sudo grep -w "$username" /etc/shadow | awk -F ':' '{print $2}')
+echo "The user $username is part of the $gid gang, lives in $home, and rides $shell."
+echo "User $uid's place is protected by the passcode $password."
+echo "More info about $username: $info"
+echo
+done < "$tmp_file"
+
+rm "$tmp_file"  # Remove the temporary file
+rm "$output_file"  # Remove the intermediate results file
