@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+# a Bash script that:
+#Creates the file /var/run/myscript.pid containing its PID
+
+pid_file="/var/run/myscript.pid"
+
+# Function to handle SIGTERM and SIGQUIT signals
+cleanup() {
+    echo "Deleting $pid_file"
+    rm "$pid_file"
+    echo "Terminating script..."
+    exit
+}
+
+# Function to handle SIGINT signal
+interrupt() {
+    echo "Y U no love me?!"
+}
+
+# Function to handle SIGTERM signal
+term() {
+    echo "I hate the kill command"
+}
+
+# Register signal handlers
+trap cleanup EXIT
+trap interrupt SIGINT
+trap term SIGTERM
+
+# Write script's PID to the file
+echo "$$" > "$pid_file"
+
+# Display message indefinitely
+echo "To infinity and beyond!"
+while true; do
+    sleep 1
+done
