@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+#TCP and UDP ports
+
+# Run netstat to get the listening sockets
+netstat -tuln | grep 'LISTEN' | awk '{print $4, $NF}' | while read -r line; do
+    # Extract the IP and port from the netstat output
+    ip=$(echo "$line" | awk '{split($1, a, ":"); print a[1]}')
+    port=$(echo "$line" | awk '{split($1, a, ":"); print a[2]}')
+
+    # Get the PID and program name associated with the socket
+    pid=$(lsof -i :"$port" -sTCP:LISTEN -t)
+    program=$(ps -p "$pid" -o comm=)
+
+    # Print the information
+    echo "Listening on IP: $ip, Port: $port"
+    echo "  PID: $pid, Program: $program"
+    echo "--------------------"
+done
