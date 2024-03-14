@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+#a Bash script that configures an Ubuntu server with the below requirements.
+
+# Update /etc/hosts file to configure localhost resolution
+echo "127.0.0.2 localhost" | sudo tee -a /etc/hosts
+
+# Configure DNS resolution for facebook.com
+echo "nameserver 8.8.8.8" | sudo tee /etc/resolv.conf
+
+# Restart networking service to apply changes
+sudo systemctl restart networking.service
